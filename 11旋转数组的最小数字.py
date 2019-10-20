@@ -55,7 +55,6 @@ def findmin_bisect2(arr):
         # 左去重
         while left + 1 < length and arr[left] == arr[left + 1]:
             left += 1
-
         # 右去重
         while right - 1 >= 0 and arr[right] == arr[right - 1]:
             right -= 1
