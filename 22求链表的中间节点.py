@@ -1,17 +1,14 @@
 """
-题目：
+相关题目：
 
-输入一个链表，输出该链表中倒数第 k 个节点。
-为了符合大多数人的习惯，本题从 1 开始计数，即链表的尾节点是倒数第 1 个节点。
-例如，一个链表有 6 个节点，从头节点开始，它们的值依次是 1、2、3、4、5、6。
-这个链表的倒数第 3 个节点是值为 4 的节点。
+如果链表中的节点总数为奇数，则返回中间节点；
+如果节点总数是偶数，则返回中间两个节点的任意一个。
 
-举一反三：
-当我们用一个指针遍历链表不能解决问题的时候，可以尝试用两个指针来遍历链表。
-可以让其中一个指针遍历的速度快一些（比如一次在链表上走两步），
-或者让它先在链表上走若干步。
+提示：
+为了解决这个问题，我们可以定义两个指针，
+同时从链表的头节点出发，一个指针一次走一步，另一个指针一次走两步。
+当走得快的指针走到链表的末尾时，走得慢的指针正好在链表的中间。
 """
-
 
 class Node:
     def __init__(self, val):
@@ -85,13 +82,14 @@ def find_kth_to_tail3(list_head, k):
     return p_left
 
 
-def make_linked_list():
+def make_linked_lists():
     nodes = [Node(i) for i in range(1, 6)]
     for i in range(len(nodes)):
         if i == len(nodes) - 1:
             break
         nodes[i].next = nodes[i + 1]
-    return nodes
+    # 返回：(奇数个链表，偶数个链表)
+    return nodes, nodes[:-1]
 
 
 if __name__ == '__main__':
@@ -137,46 +135,3 @@ if __name__ == '__main__':
         print(find_kth_to_tail2(linked_list[0], k))
         print(find_kth_to_tail3(linked_list[0], k))
         print('-' * 20)
-
-
-"""
-=====正常情况1=====
-链表为：[node(1), node(2), node(3), node(4), node(5)]，k为2
-node(4)
-node(4)
-node(4)
-
-=====正常情况2=====
-链表为：[node(1), node(2), node(3), node(4), node(5)]，k为5
-node(1)
-node(1)
-node(1)
-
-=====正常情况3=====
-链表为：[node(1), node(2), node(3), node(4), node(5)]，k为1
-node(5)
-node(5)
-node(5)
-
-=====链表头指针为None=====
-None
-None
-None
-
-=====k为负数、零、超界=====
-k为-5时：
-None
-None
-None
---------------------
-k为0时：
-None
-None
-None
---------------------
-k为99时：
-None
-None
-None
---------------------
-"""
