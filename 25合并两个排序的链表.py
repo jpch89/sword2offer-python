@@ -8,6 +8,8 @@ class ListNode:
     def __init__(self, x):
         self.val = x
         self.next = None
+
+团子注：本题还可以使用递归法，待以后补上！
 """
 
 class ListNode:
