@@ -9,7 +9,7 @@ class ListNode:
         self.val = x
         self.next = None
 
-团子注：本题还可以使用递归法，待以后补上！
+团子注：本题写了两种解法，都已经测试通过！
 """
 
 class ListNode:
@@ -18,7 +18,7 @@ class ListNode:
         self.next = None
 
 class Solution:
-    # 返回合并后列表
+    # 方法一：依次取出头节点
     def Merge(self, pHead1, pHead2):
         if pHead1 is None:
             return pHead2
@@ -49,6 +49,22 @@ class Solution:
             p.next = p1
 
         return head
+    
+    # 方法二：递归
+    def Merge2(self, pHead1, pHead2):
+        if pHead1 is None:
+            return pHead2
+        if pHead2 is None:
+            return pHead1
+        
+        head = pHead1 if pHead1.val < pHead2.val else pHead2
+        if head is pHead1:
+            head.next = self.Merge2(pHead1.next, pHead2)
+        else:
+            head.next = self.Merge2(pHead1, pHead2.next)
+        
+        return head
+
 
 if __name__ == "__main__":
     # 构造节点
@@ -79,7 +95,7 @@ if __name__ == "__main__":
         p = p.next
     print(p.val)
     # 输出合并后链表
-    p = Solution().Merge(head1, head2)
+    p = Solution().Merge2(head1, head2)
     print('合并后链表为：')
     while p.next is not None:
         print(p.val, end=', ')
@@ -119,7 +135,7 @@ if __name__ == "__main__":
         p = p.next
     print(p.val)
     # 输出合并后链表
-    p = Solution().Merge(head1, head2)
+    p = Solution().Merge2(head1, head2)
     print('合并后链表为：')
     while p.next is not None:
         print(p.val, end=', ')
